@@ -1212,6 +1212,11 @@ class JimengSeedance2(JimengVideoBase, comfy_io.ComfyNode):
                     options=VIDEO_2_UI_OPTIONS,
                     default=VIDEO_2_UI_OPTIONS[0],
                 ),
+                comfy_io.String.Input(
+                    "endpoint_id",
+                    default="",
+                    tooltip="Optional BytePlus ModelArk endpoint ID, e.g. ep-xxx. When set, this overrides the model_version dropdown.",
+                ),
                 comfy_io.String.Input("prompt", multiline=True, default=""),
             ]
             + get_common_video_seed_inputs()
@@ -1264,6 +1269,7 @@ class JimengSeedance2(JimengVideoBase, comfy_io.ComfyNode):
         cls,
         client,
         model_version,
+        endpoint_id,
         prompt,
         generate_audio,
         enable_web_search,
@@ -1405,6 +1411,7 @@ class JimengSeedance2(JimengVideoBase, comfy_io.ComfyNode):
             aspect_ratio = "16:9"
 
         final_duration = -1 if auto_duration else duration
+        model_name = (endpoint_id or "").strip() or resolve_model_id(model_version)
         extra_api_params = {
             "generate_audio": generate_audio,
         }
@@ -1423,7 +1430,7 @@ class JimengSeedance2(JimengVideoBase, comfy_io.ComfyNode):
             save_last_frame_batch,
             non_blocking,
             node_id,
-            model_name=resolve_model_id(model_version),
+            model_name=model_name,
             content=content,
             forbidden_params=[
                 "resolution",

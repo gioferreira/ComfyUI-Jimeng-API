@@ -19,6 +19,10 @@ Current focus:
 - Seedance 2.0 model choices map to BytePlus model IDs:
   - `Seedance 2.0` -> `dreamina-seedance-2-0-260128`
   - `Seedance 2.0 Fast` -> `dreamina-seedance-2-0-fast-260128`
+- `Jimeng Seedance 2.0` has an optional `endpoint_id` field. If you disabled
+  Content Pre-filter on a BytePlus Online Inference endpoint, paste the
+  endpoint ID (`ep-...`) there so the node calls that endpoint instead of the
+  raw model ID from the dropdown.
 - First priority workflows are first-frame/last-frame image-to-video and
   reference-image-to-video.
 
@@ -57,6 +61,10 @@ Foco atual:
 - As opcoes de modelo Seedance 2.0 mapeiam para IDs BytePlus:
   - `Seedance 2.0` -> `dreamina-seedance-2-0-260128`
   - `Seedance 2.0 Fast` -> `dreamina-seedance-2-0-fast-260128`
+- O node `Jimeng Seedance 2.0` tem um campo opcional `endpoint_id`. Se voce
+  desativou o Content Pre-filter em um endpoint de Online Inference da
+  BytePlus, cole o ID do endpoint (`ep-...`) nesse campo para o node chamar
+  esse endpoint em vez do ID cru do modelo no dropdown.
 - Os fluxos prioritarios sao first-frame/last-frame image-to-video e
   reference-image-to-video.
 
