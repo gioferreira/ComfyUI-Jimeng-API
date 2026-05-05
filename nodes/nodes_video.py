@@ -1440,6 +1440,8 @@ class JimengSeedance2(JimengVideoBase, comfy_io.ComfyNode):
                 "seed",
                 "generate_audio",
             ],
+            service_tier=None,
+            execution_expires_after=None,
             enable_random_seed=enable_random_seed,
             is_auto_duration=auto_duration,
             extra_api_params=extra_api_params,
