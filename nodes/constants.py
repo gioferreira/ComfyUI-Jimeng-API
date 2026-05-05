@@ -365,7 +365,13 @@ LOG_TRANSLATIONS = {
             "OutputVideoSensitiveContentDetected": "Generated video contains sensitive content (400).",
             "OutputVideoSensitiveContentDetected.PolicyViolation": "Generated video may be restricted due to copyright policy (400).",
             "OutputAudioSensitiveContentDetected": "Generated audio contains sensitive content (400).",
-            "InputMediaMayContainRealPerson": "Request failed: input image or video may contain a real person.",
+            "InputMediaMayContainRealPerson": (
+                "Request failed: input image or video may contain a real person. "
+                "See README.md for BytePlus Content Pre-filter setup. "
+                "If you disabled it in Online Inference, call that endpoint by "
+                "pasting its endpoint ID (ep-...) into the Jimeng Seedance 2.0 "
+                "endpoint_id field."
+            ),
             "InvalidImageURL": "Invalid Image URL (400).",
             "InvalidImageDetail": "Invalid Image Detail parameter (400).",
             "MissingParameter": "Missing Parameter (400).",
@@ -382,6 +388,7 @@ ERROR_TEXT_MATCH_RULES = {
     "output image may contain sensitive information": "OutputImageSensitiveContentDetected",
     "input text may contain sensitive information": "InputTextSensitiveContentDetected",
     "input image may contain sensitive information": "InputImageSensitiveContentDetected", 
+    "input image or video may contain a real person": "InputMediaMayContainRealPerson",
     "the request failed because the input video may contain real person": "InputMediaMayContainRealPerson",
     "the request failed because the input image may contain real person": "InputMediaMayContainRealPerson",
     "input video may contain sensitive information": "InputVideoSensitiveContentDetected",
