@@ -2,33 +2,88 @@
   <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/1.74.0/files/dark/jimeng-color.png" width="120" />
 </div>
 
-# ComfyUI 即梦 API 节点
+# ComfyUI Jimeng API - BytePlus ModelArk fork
 
-## BytePlus ModelArk fork note
+## English
 
-This branch is being adapted as a clean BytePlus-focused fork, separate from
-`ComfyUI-GFUtils`.
+This fork adapts `fkxianzhou/ComfyUI-Jimeng-API` for **BytePlus ModelArk**
+accounts and API keys. The original project targets Volcano Ark in China; this
+fork points the Seedance 2.0 path at the international BytePlus data plane.
 
-The first supported target is the existing `Jimeng Seedance 2.0` node, now
-pointed at BytePlus ModelArk:
+Current focus:
 
-- Base URL: `https://ark.ap-southeast.bytepluses.com/api/v3`
-- Models:
+- `Jimeng API Client` can read `ARK_API_KEY` or `BYTEPLUS_API_KEY` from the
+  environment by selecting `Environment`.
+- `Jimeng Seedance 2.0` uses the BytePlus base URL:
+  `https://ark.ap-southeast.bytepluses.com/api/v3`.
+- Seedance 2.0 model choices map to BytePlus model IDs:
   - `Seedance 2.0` -> `dreamina-seedance-2-0-260128`
   - `Seedance 2.0 Fast` -> `dreamina-seedance-2-0-fast-260128`
-- Priority workflows:
-  - first-frame / last-frame image-to-video
-  - reference-image-to-video
+- First priority workflows are first-frame/last-frame image-to-video and
+  reference-image-to-video.
 
-API key setup:
+Setup:
 
 ```bash
 export ARK_API_KEY="your_byteplus_modelark_key"
 ```
 
-`BYTEPLUS_API_KEY` is also accepted. In ComfyUI, use the `Jimeng API Client`
-node and select `Environment`, or select `Custom` and paste the key directly.
-Make sure the Seedance 2.0 model is activated in the BytePlus ModelArk console.
+`BYTEPLUS_API_KEY` is also accepted. Make sure the Seedance 2.0 model is
+activated in your BytePlus ModelArk console before running a workflow.
+
+Install with a symlink or clone into ComfyUI's `custom_nodes` directory:
+
+```bash
+cd ComfyUI/custom_nodes
+git clone https://github.com/gioferreira/ComfyUI-Jimeng-API.git
+```
+
+This is intentionally kept separate from `ComfyUI-GFUtils`, because ModelArk
+nodes have their own API credentials, remote costs, SDK compatibility concerns,
+and release cadence.
+
+## Portugues (Brasil)
+
+Este fork adapta o `fkxianzhou/ComfyUI-Jimeng-API` para contas e API keys da
+**BytePlus ModelArk**. O projeto original usa Volcano Ark na China; este fork
+aponta o caminho do Seedance 2.0 para a API internacional da BytePlus.
+
+Foco atual:
+
+- O node `Jimeng API Client` consegue ler `ARK_API_KEY` ou `BYTEPLUS_API_KEY`
+  do ambiente quando voce seleciona `Environment`.
+- O node `Jimeng Seedance 2.0` usa a base URL da BytePlus:
+  `https://ark.ap-southeast.bytepluses.com/api/v3`.
+- As opcoes de modelo Seedance 2.0 mapeiam para IDs BytePlus:
+  - `Seedance 2.0` -> `dreamina-seedance-2-0-260128`
+  - `Seedance 2.0 Fast` -> `dreamina-seedance-2-0-fast-260128`
+- Os fluxos prioritarios sao first-frame/last-frame image-to-video e
+  reference-image-to-video.
+
+Configuracao:
+
+```bash
+export ARK_API_KEY="sua_key_byteplus_modelark"
+```
+
+`BYTEPLUS_API_KEY` tambem funciona. Ative o modelo Seedance 2.0 no console da
+BytePlus ModelArk antes de rodar um workflow.
+
+Instale com symlink ou clone dentro de `custom_nodes` do ComfyUI:
+
+```bash
+cd ComfyUI/custom_nodes
+git clone https://github.com/gioferreira/ComfyUI-Jimeng-API.git
+```
+
+Este fork fica separado do `ComfyUI-GFUtils` de proposito: nodes ModelArk tem
+credenciais, custo remoto, compatibilidade de SDK e ritmo de manutencao proprios.
+
+## Original README
+
+The upstream README continues below for the original node descriptions.
+
+# ComfyUI 即梦 API 节点
 
 本项目为 [ComfyUI](https://github.com/comfyanonymous/ComfyUI) 提供了火山方舟的视觉模型（即梦/豆包） API 节点。用户可以通过这些节点在 ComfyUI 中使用多种图像生成和视频生成功能。
 
@@ -49,7 +104,7 @@ Make sure the Seedance 2.0 model is activated in the BytePlus ModelArk console.
 方式1：  **克隆仓库**:
 打开终端，`cd` 到 ComfyUI 的 `custom_nodes` 目录，运行：
 `bash
-    git clone https://github.com/fkxianzhou/ComfyUI-Jimeng-API
+    git clone https://github.com/gioferreira/ComfyUI-Jimeng-API
     `
 &#x20;  &#x20;
 
