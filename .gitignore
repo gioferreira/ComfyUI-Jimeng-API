@@ -35,3 +35,4 @@ files_upload_cache.json
 ARCHITECTURE.md
 /web/docs/
 V3 迁移指南.md
+.worktrees/
