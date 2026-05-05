@@ -10,10 +10,25 @@ import PIL.Image
 import folder_paths
 import random
 import shutil
+from urllib.parse import urlparse
 from .nodes_shared import log_msg
 
 DEFAULT_DOWNLOAD_TIMEOUT = 60
+DEFAULT_VIDEO_DOWNLOAD_TIMEOUT = 600
 DEFAULT_DOWNLOAD_RETRIES = 3
+
+
+def _format_download_error(e: Exception) -> str:
+    message = str(e).strip()
+    if message:
+        return message
+    return type(e).__name__
+
+
+def _guess_file_ext(url: str, fallback: str) -> str:
+    path = urlparse(url).path
+    ext = os.path.splitext(path)[1].lstrip(".")
+    return ext or fallback
 
 
 def _image_bytes_to_tensor(image_data: bytes) -> torch.Tensor:
@@ -72,7 +87,7 @@ async def _fetch_data_from_url_async(
                 attempt=attempt,
                 total=retries + 1,
                 delay=retry_delay,
-                e=e,
+                e=_format_download_error(e),
             )
             await asyncio.sleep(retry_delay)
     return b""
@@ -171,7 +186,7 @@ async def _download_to_file_stream_async(
                 attempt=attempt,
                 total=retries + 1,
                 delay=retry_delay,
-                e=e,
+                e=_format_download_error(e),
             )
             await asyncio.sleep(retry_delay)
     return False
@@ -188,7 +203,7 @@ async def download_video_to_temp(
     """
     if not url:
         return None
-    file_ext = url.split(".")[-1].split("?")[0] or "mp4"
+    file_ext = _guess_file_ext(url, "mp4")
 
     if seed is not None:
         prefix = f"{prefix}_seed_{seed}"
@@ -206,7 +221,9 @@ async def download_video_to_temp(
     final_path = os.path.join(full_output_folder, final_filename)
 
     try:
-        success = await _download_to_file_stream_async(session, url, final_path)
+        success = await _download_to_file_stream_async(
+            session, url, final_path, timeout=DEFAULT_VIDEO_DOWNLOAD_TIMEOUT
+        )
         if success:
             return final_path
         return None
@@ -228,7 +245,7 @@ async def download_image_to_temp(
     if not url:
         return (None, None)
 
-    file_ext = url.split(".")[-1].split("?")[0] or "jpg"
+    file_ext = _guess_file_ext(url, "jpg")
     (path, data) = await _download_to_temp_base(
         session, url, prefix, seed, save_path_name, file_ext
     )
