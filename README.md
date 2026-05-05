@@ -4,6 +4,32 @@
 
 # ComfyUI 即梦 API 节点
 
+## BytePlus ModelArk fork note
+
+This branch is being adapted as a clean BytePlus-focused fork, separate from
+`ComfyUI-GFUtils`.
+
+The first supported target is the existing `Jimeng Seedance 2.0` node, now
+pointed at BytePlus ModelArk:
+
+- Base URL: `https://ark.ap-southeast.bytepluses.com/api/v3`
+- Models:
+  - `Seedance 2.0` -> `dreamina-seedance-2-0-260128`
+  - `Seedance 2.0 Fast` -> `dreamina-seedance-2-0-fast-260128`
+- Priority workflows:
+  - first-frame / last-frame image-to-video
+  - reference-image-to-video
+
+API key setup:
+
+```bash
+export ARK_API_KEY="your_byteplus_modelark_key"
+```
+
+`BYTEPLUS_API_KEY` is also accepted. In ComfyUI, use the `Jimeng API Client`
+node and select `Environment`, or select `Custom` and paste the key directly.
+Make sure the Seedance 2.0 model is activated in the BytePlus ModelArk console.
+
 本项目为 [ComfyUI](https://github.com/comfyanonymous/ComfyUI) 提供了火山方舟的视觉模型（即梦/豆包） API 节点。用户可以通过这些节点在 ComfyUI 中使用多种图像生成和视频生成功能。
 
 - 项目已支持 `Seedance 2.0` 与 `Seedance 2.0 fast` 视频生成节点，可用于文生视频、多模态参考、视频编辑与视频延长场景。
@@ -40,8 +66,8 @@
 ### 方式 2：节点内配置
 
 1. 在 ComfyUI 中添加 **Jimeng API Client** 节点。
-2. 在 `key_name` 下拉框中选择 **Custom**。
-3. 在弹出的输入框中填入您的 API Key。
+2. 在 `key_name` 下拉框中选择 **Environment** 使用 `ARK_API_KEY` / `BYTEPLUS_API_KEY`，或选择 **Custom**。
+3. 如选择 **Custom**，在弹出的输入框中填入您的 API Key。
 4. （可选）在 `new_key_name` 中填入一个名称（如 "MyKey"），运行一次后该 Key 将被自动保存。
    - *注意：保存后需刷新浏览器页面，新密钥才会显示在下拉列表中。*
 
