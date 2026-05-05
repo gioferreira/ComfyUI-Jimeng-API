@@ -14,7 +14,7 @@ from urllib.parse import urlparse
 from .nodes_shared import log_msg
 
 DEFAULT_DOWNLOAD_TIMEOUT = 60
-DEFAULT_VIDEO_DOWNLOAD_TIMEOUT = 600
+DEFAULT_VIDEO_DOWNLOAD_TIMEOUT = 400
 DEFAULT_DOWNLOAD_RETRIES = 3
 
 
