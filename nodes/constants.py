@@ -1,7 +1,7 @@
 # Jimeng API 常量与多语言配置
 
 # API 配置
-JIMENG_API_BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
+JIMENG_API_BASE_URL = "https://ark.ap-southeast.bytepluses.com/api/v3"
 
 # 通用常量
 MAX_SEED = 2147483647

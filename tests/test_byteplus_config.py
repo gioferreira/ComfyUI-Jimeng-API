@@ -8,6 +8,8 @@ from nodes.byteplus_config import (
     resolve_seedance2_model,
     get_api_key,
 )
+from nodes.constants import JIMENG_API_BASE_URL
+from nodes.models_config import VIDEO_2_UI_OPTIONS, VIDEO_MODEL_MAP
 
 
 class BytePlusConfigTests(unittest.TestCase):
@@ -44,6 +46,23 @@ class BytePlusConfigTests(unittest.TestCase):
         self.assertEqual(
             BYTEPLUS_BASE_URL,
             "https://ark.ap-southeast.bytepluses.com/api/v3",
+        )
+
+    def test_existing_client_base_url_points_to_byteplus_data_plane(self):
+        self.assertEqual(JIMENG_API_BASE_URL, BYTEPLUS_BASE_URL)
+
+    def test_existing_seedance2_options_resolve_to_byteplus_model_ids(self):
+        self.assertEqual(
+            VIDEO_2_UI_OPTIONS,
+            ["Seedance 2.0", "Seedance 2.0 Fast"],
+        )
+        self.assertEqual(
+            VIDEO_MODEL_MAP["Seedance 2.0"],
+            "dreamina-seedance-2-0-260128",
+        )
+        self.assertEqual(
+            VIDEO_MODEL_MAP["Seedance 2.0 Fast"],
+            "dreamina-seedance-2-0-fast-260128",
         )
 
 

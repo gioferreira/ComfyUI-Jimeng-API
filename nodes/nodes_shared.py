@@ -22,6 +22,7 @@ from comfy_api.latest import io as comfy_io
 import logging
 
 from .constants import LOG_TRANSLATIONS, ERROR_TEXT_MATCH_RULES, JIMENG_API_BASE_URL
+from .byteplus_config import BytePlusConfigError, get_api_key
 
 LOG_PREFIX = "[JimengAI] "
 
@@ -803,6 +804,7 @@ class JimengAPIClient(comfy_io.ComfyNode):
     def define_schema(cls) -> comfy_io.Schema:
         load_api_keys()
         key_names = API_KEY_STORE.get_key_names()
+        key_names.append("Environment")
         key_names.append("Custom")
 
         return comfy_io.Schema(
@@ -823,7 +825,13 @@ class JimengAPIClient(comfy_io.ComfyNode):
     ) -> comfy_io.NodeOutput:
         api_key = None
 
-        if key_name == "Custom":
+        if key_name == "Environment":
+            try:
+                api_key = get_api_key()
+            except BytePlusConfigError as e:
+                raise JimengException(str(e)) from e
+
+        elif key_name == "Custom":
             if not new_api_key or not new_api_key.strip():
                 raise JimengException(get_text("err_new_key_empty"))
             

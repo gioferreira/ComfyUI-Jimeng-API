@@ -830,7 +830,7 @@ class JimengSeedance1(JimengVideoBase, comfy_io.ComfyNode):
             ]
             + get_common_video_seed_inputs()
             + [
-                get_resolution_input(default="720p", support_1080p=True),
+                get_resolution_input(default="720p", support_1080p=False),
                 get_aspect_ratio_input(default="adaptive", include_adaptive=True),
                 get_duration_input(
                     default=5.0, min_val=1.2, max_val=12.0, step=0.2, is_int=False
